@@ -1,6 +1,6 @@
-# User List App
+# Posts List App
 
-View and filter the list of posts!
+View and filter the list of all posts!
 
 ## Available functionality
 
