@@ -27,11 +27,12 @@ export interface IUser {
   company: ICompany,
 }
 
-export const getUsers = async () => {
+export const getUsers = async (): Promise<IUser[]> => {
   try {
     const response = await axios.get(GET_USERS);
-    return response;
+    return response.data;
   } catch (e) {
     console.error((e as AxiosError).message)
+    throw e;
   }
 }

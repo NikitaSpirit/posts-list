@@ -1,11 +1,14 @@
 import React from "react";
 import "./App.css";
-import { PostsList } from "./components/PostsList";
+import { Posts } from "./components/Posts";
+import { UsersFilter } from "./components/UsersFilter";
 
 function App() {
   return (
     <div className="App">
-      <PostsList />
+      <div>PostsList</div>
+      <UsersFilter />
+      <Posts />
     </div>
   );
 }

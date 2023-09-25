@@ -8,11 +8,12 @@ export interface IPost {
   body: string,
 }
 
-export const getPosts = async () => {
+export const getPosts = async (): Promise<IPost[]> => {
   try {
     const response = await axios.get(GET_POSTS);
-    return response;
+    return response.data;
   } catch (e) {
     console.error((e as AxiosError).message)
+    throw e;
   }
 }
