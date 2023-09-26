@@ -3,7 +3,9 @@ import {
   fetchPostsRequest,
   fetchPostsSuccess,
   fetchPostsFailure,
+  fetchUsersRequest,
   fetchUsersSuccess,
+  fetchUsersFailure
 } from "./actions";
 import { getPosts } from "../api/getPosts";
 import { getUsers } from "../api/getUsers";
@@ -25,35 +27,20 @@ function* fetchPostsSaga(payload: IFetchPostsSaga): any {
 }
 function* fetchUsersSaga(): any {
   try {
-    yield put(fetchPostsRequest());
+    yield put(fetchUsersRequest());
     const data: IUser[] = yield call(getUsers);
     yield put(fetchUsersSuccess(data));
   } catch (error) {
-    yield put(fetchPostsFailure(error as AxiosError));
+    yield put(fetchUsersFailure(error as AxiosError));
   }
 }
 
-// interface IFetchPostCommentsSaga {
-//   userId: number;
-// }
-// function* fetchPostCommentsSaga(payload: IFetchPostCommentsSaga): any {
-//   try {
-//     yield put(fetchPostsRequest());
-//     const data: IUser[] = yield call(getUsers);
-//     yield put(fetchUsersSuccess(data));
-//   } catch (error) {
-//     yield put(fetchPostsFailure(error as AxiosError));
-//   }
-// }
-
 export const FETCH_POSTS_SAGA = 'FETCH_POSTS_SAGA';
 export const FETCH_USERS_SAGA = 'FETCH_USERS_SAGA';
-// export const FETCH_POST_COMMENTS_SAGA = 'FETCH_POST_COMMENTS_SAGA';
 function* watchFetchData() {
   // @ts-ignore
   yield takeEvery(FETCH_POSTS_SAGA, fetchPostsSaga);
   yield takeEvery(FETCH_USERS_SAGA, fetchUsersSaga);
-  // yield takeEvery(FETCH_POST_COMMENTS_SAGA, fetchPostCommentsSaga);
 }
 
 export default function* rootSaga() {

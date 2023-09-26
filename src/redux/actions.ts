@@ -22,7 +22,7 @@ export const fetchPostsFailure = (error: AxiosError) => ({
   payload: error,
 });
 
-export const fetchUserRequest = () => ({
+export const fetchUsersRequest = () => ({
   type: FETCH_USERS_REQUEST,
 });
 export const fetchUsersSuccess = (users: IUser[]) => ({
