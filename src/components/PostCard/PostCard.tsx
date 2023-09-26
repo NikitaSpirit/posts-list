@@ -15,7 +15,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
       <div className={styles.title}>{title}</div>
       <div className={styles.body}>{body}</div>
       <div className={styles.expand} onClick={toggleExpand}>
-        Expand {isExpanded ? "⇑" : "⇓"}
+        {isExpanded ? "Close comments ⇑" : " Expand ⇓"}
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { FETCH_POSTS_SAGA } from "../../redux/sagas";
 import { IPost } from "../../api/getPosts";
 import { IState } from "../../redux/reducers";
 import { PostCard } from "../PostCard";
+import { useSearchParams } from "react-router-dom";
 
 import styles from "./index.module.scss";
 
@@ -11,12 +12,13 @@ export const Posts: React.FC = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state: IState) => state.posts.data);
   const isLoading = useSelector((state: IState) => state.posts.loading);
+  const [searchParams] = useSearchParams();
+
+  console.log("POSTS - searchParams", searchParams.get("userId"));
 
   useEffect(() => {
     dispatch({ type: FETCH_POSTS_SAGA });
-  }, []);
-  console.log("isLoading");
-  console.log(isLoading);
+  }, [dispatch]);
 
   if (isLoading) {
     return <div>Loading...</div>;

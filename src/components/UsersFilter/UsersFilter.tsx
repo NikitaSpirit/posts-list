@@ -5,14 +5,14 @@ import { FETCH_USERS_SAGA } from "../../redux/sagas";
 import Select from "react-select";
 import { IUser } from "../../api/getUsers";
 import styles from "./index.module.scss";
+import { useSearchParams } from "react-router-dom";
 import colors from "../../styles/colors.module.scss";
 
 export const UsersFilter = () => {
   const dispatch = useDispatch();
   const users: IUser[] = useSelector((state: IState) => state.users.data);
   const isLoading = useSelector((state: IState) => state.users.loading);
-  console.log("users");
-  console.log(users);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     dispatch({ type: FETCH_USERS_SAGA });
@@ -29,7 +29,13 @@ export const UsersFilter = () => {
       <Select
         isMulti
         defaultValue={null}
-        onChange={(e) => console.log(e)}
+        onChange={(values) => {
+          if (values.length === 0) {
+            return setSearchParams(undefined);
+          }
+          const userIds = values.map((option) => option?.value);
+          setSearchParams({ userId: userIds.join(",") });
+        }}
         options={options}
         isDisabled={isLoading}
         styles={{
