@@ -14,11 +14,12 @@ export const Posts: React.FC = () => {
   const isLoading = useSelector((state: IState) => state.posts.loading);
   const [searchParams] = useSearchParams();
 
-  console.log("POSTS - searchParams", searchParams.get("userId"));
+  const userIdParam = searchParams.get("userId");
 
   useEffect(() => {
-    dispatch({ type: FETCH_POSTS_SAGA });
-  }, [dispatch]);
+    const userIds = userIdParam ? userIdParam.split(",") : [];
+    dispatch({ type: FETCH_POSTS_SAGA, userIds });
+  }, [dispatch, userIdParam]);
 
   if (isLoading) {
     return <div>Loading...</div>;
