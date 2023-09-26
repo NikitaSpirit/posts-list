@@ -1,21 +1,23 @@
 @import '../../styles/colors.module.scss';
 
+.postCardContainer {
+  height: 250px;
+  overflow: visible;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
 .postCard {
   width: 400px;
-  min-height: 250px;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
   overflow: hidden;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  border: 2px solid $violet;;
+  border: 2px solid $violet;
+  overflow: visible;
+  position: relative;
   // apply same paddings for title and body of the post
   > * {
     padding: 6px 8px;
-  }
-  &:last-child {
-    margin: 0;
   }
 }
 

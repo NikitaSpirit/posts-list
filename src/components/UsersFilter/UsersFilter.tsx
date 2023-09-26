@@ -12,11 +12,11 @@ export const UsersFilter = () => {
   const dispatch = useDispatch();
   const users: IUser[] = useSelector((state: IState) => state.users.data);
   const isLoading = useSelector((state: IState) => state.users.loading);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     dispatch({ type: FETCH_USERS_SAGA });
-  }, []);
+  }, [dispatch]);
 
   const options = users.map((user) => ({
     value: user.id,

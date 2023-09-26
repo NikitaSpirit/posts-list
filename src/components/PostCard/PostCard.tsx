@@ -22,6 +22,8 @@ const PostComment: React.FC<PostCommentProps> = ({ comment }) => {
   );
 };
 
+const postCardHeight = 250;
+
 export const PostCard: React.FC<PostCardProps> = ({ post }) => {
   const { id, title, body } = post;
   const [isExpanded, setIsExpanded] = useState(false);
@@ -42,21 +44,31 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
   const toggleExpand = () => setIsExpanded(!isExpanded);
 
   return (
-    <div className={styles.postCard}>
-      <div className={styles.title}>{title}</div>
-      <div className={styles.body}>{body}</div>
-      {isExpanded && (
-        <div className={styles.commentsContainer}>
-          <p className={styles.commentsTitle}>Comments:</p>
-          {areCommentsLoading ? (
-            <p>Comments are loading...</p>
-          ) : (
-            comments.map((comment) => <PostComment comment={comment} />)
-          )}
+    <div className={styles.postCardContainer}>
+      <div
+        className={styles.postCard}
+        style={{
+          height: isExpanded ? "auto" : postCardHeight,
+          zIndex: isExpanded ? 1 : 0,
+        }}
+      >
+        <div className={styles.title}>{title}</div>
+        <div className={styles.body}>{body}</div>
+        {isExpanded && (
+          <div className={styles.commentsContainer}>
+            <p className={styles.commentsTitle}>Comments:</p>
+            {areCommentsLoading ? (
+              <p>Comments are loading...</p>
+            ) : (
+              comments.map((comment) => (
+                <PostComment key={comment.id} comment={comment} />
+              ))
+            )}
+          </div>
+        )}
+        <div className={styles.expand} onClick={toggleExpand}>
+          {isExpanded ? "Close comments ⇑" : " Expand ⇓"}
         </div>
-      )}
-      <div className={styles.expand} onClick={toggleExpand}>
-        {isExpanded ? "Close comments ⇑" : " Expand ⇓"}
       </div>
     </div>
   );
