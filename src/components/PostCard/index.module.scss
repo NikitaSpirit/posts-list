@@ -1,0 +1,42 @@
+@import '../../styles/colors.module.scss';
+
+.postCard {
+  width: 400px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  // apply same paddings for title and body of the post
+  > * {
+    padding: 6px 8px;
+  }
+  &:last-child {
+    margin: 0;
+  }
+}
+
+.title {
+  background-color: $violet;
+  color: $milky;
+  font-weight: 500;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.body {
+  background-color: $lightViolet;
+  flex: auto;
+  // height: 100%;
+}
+.expand {
+  display: flex;
+  justify-content: center;
+  height: 24px;
+  background-color: $coral;
+  cursor: pointer;
+  user-select: none;
+}
