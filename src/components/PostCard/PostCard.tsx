@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { IPost } from "../../api/getPosts";
 import { IComment } from "../../api/getCommentsByPostId";
-import styles from "./index.module.scss";
 import { getCommentsByPostId } from "../../api/getCommentsByPostId";
+
+import styles from "./index.module.scss";
 
 interface PostCardProps {
   post: IPost;
@@ -12,8 +13,13 @@ interface PostCommentProps {
 }
 
 const PostComment: React.FC<PostCommentProps> = ({ comment }) => {
-  const { name } = comment;
-  return <div>{name}</div>;
+  const { name, body } = comment;
+  return (
+    <div className={styles.comment}>
+      <p className={styles.commentName}>{name}</p>
+      <p>{body}</p>
+    </div>
+  );
 };
 
 export const PostCard: React.FC<PostCardProps> = ({ post }) => {
@@ -40,14 +46,14 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
       <div className={styles.title}>{title}</div>
       <div className={styles.body}>{body}</div>
       {isExpanded && (
-        <>
+        <div className={styles.commentsContainer}>
           <p className={styles.commentsTitle}>Comments:</p>
           {areCommentsLoading ? (
             <p>Comments are loading...</p>
           ) : (
             comments.map((comment) => <PostComment comment={comment} />)
           )}
-        </>
+        </div>
       )}
       <div className={styles.expand} onClick={toggleExpand}>
         {isExpanded ? "Close comments ⇑" : " Expand ⇓"}

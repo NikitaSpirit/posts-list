@@ -41,9 +41,20 @@
   user-select: none;
 }
 
+.commentsContainer {
+  background-color: $coral;
+}
 .commentsTitle {
+  margin: 0;
   font-weight: bold;
 }
-.postComment {
-  
+.comment {
+  border-top: 1px solid $lightViolet;
+  padding: 4px;
+  &:last-child {
+    border-bottom: 1px solid $lightViolet;
+  }
+}
+.commentName {
+  font-weight: bold;
 }
