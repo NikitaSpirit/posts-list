@@ -9,7 +9,6 @@ export interface IPost {
 }
 
 const generateSearchQuery = (userIds: number[]) => {
-  console.log('generateSearchQuery', userIds)
   let searchQuery = '';
   if (userIds.length > 0) {
     searchQuery = `?&userId=${userIds.join('&userId=')}`
